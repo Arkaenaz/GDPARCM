@@ -24,12 +24,12 @@ void TextureDisplay::update(sf::Time deltaTime)
 {
 	this->ticks += deltaTime.asMilliseconds();
 
-	if (this->ticks > this->STREAMING_LOAD_DELAY)
+	if (this->ticks > this->STREAMING_LOAD_DELAY && this->iconCount < 480)
 	{
 		this->ticks = 0.0f;
 		TextureManager::getInstance()->loadSingleStreamAsset(this->iconCount);
-		this->iconCount++;
 		this->spawnObject();
+		this->iconCount++;
 	}
 }
 
@@ -46,8 +46,6 @@ void TextureDisplay::spawnObject()
 	iconObj->setPosition(x, y);
 
 	this->iconList.push_back(iconObj);
-
-	std::cout << "Set position: " << x << " " << y << std::endl;
 
 	this->columnGrid++;
 	if(this->columnGrid == this->MAX_COLUMN)

@@ -1,6 +1,7 @@
-#include "pch.h"
+	#include "pch.h"
 #include "TextureManager.h"
 
+#include "IETThread.h"
 #include "StringUtility.h"
 
 TextureManager* TextureManager::P_SHARED_INSTANCE = nullptr;
@@ -25,12 +26,14 @@ void TextureManager::loadSingleStreamAsset(int index)
 	for (const auto& entry : std::filesystem::directory_iterator(STREAMING_PATH)) {
 		if (index == fileNum)
 		{
+			IETThread::sleep(200);
+
 			std::string path = entry.path().generic_string();
 			std::vector<std::string> stringSplit = StringUtility::split(path, '/');
 			std::string assetName = StringUtility::split(stringSplit[stringSplit.size() - 1], '.')[0];
 			this->instantiateTexture(path, assetName, true);
 
-			std::cout << "[TextureManager] Loaded streaming texture: " << assetName << std::endl;
+			break;
 		}
 		fileNum++;
 	}

@@ -50,6 +50,9 @@
     <ClCompile Include="Source\StringUtility.cpp">
       <Filter>Source\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="Source\IETThread.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\BaseRunner.h">
@@ -81,6 +84,9 @@
     </ClInclude>
     <ClInclude Include="Source\StringUtility.h">
       <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IETThread.h">
+      <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

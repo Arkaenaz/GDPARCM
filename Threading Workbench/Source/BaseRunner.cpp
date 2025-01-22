@@ -40,7 +40,7 @@ void BaseRunner::run()
 		while (timeSinceLastUpdate > TIME_PER_FRAME)
 		{
 			timeSinceLastUpdate -= TIME_PER_FRAME;
-			update(TIME_PER_FRAME * GAME_SPEED);
+			update(elapsedTime * GAME_SPEED);
 		}
 		render();
 	}

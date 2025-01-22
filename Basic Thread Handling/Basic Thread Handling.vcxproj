@@ -11,38 +11,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\BackgroundObject.cpp" />
-    <ClCompile Include="Source\AGameObject.cpp" />
-    <ClCompile Include="Source\BaseRunner.cpp" />
-    <ClCompile Include="Source\FPSCounter.cpp" />
-    <ClCompile Include="Source\GameObjectManager.cpp" />
-    <ClCompile Include="Source\IconObject.cpp" />
+    <ClCompile Include="Source\MyThread.cpp" />
     <ClCompile Include="Source\IETThread.cpp" />
     <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\StringUtility.cpp" />
-    <ClCompile Include="Source\TextureDisplay.cpp" />
-    <ClCompile Include="Source\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\BackgroundObject.h" />
-    <ClInclude Include="Source\AGameObject.h" />
-    <ClInclude Include="Source\BaseRunner.h" />
-    <ClInclude Include="Source\FPSCounter.h" />
-    <ClInclude Include="Source\GameObjectManager.h" />
-    <ClInclude Include="Source\IconObject.h" />
+    <ClInclude Include="Source\MyThread.h" />
     <ClInclude Include="Source\IETThread.h" />
     <ClInclude Include="Source\pch.h" />
-    <ClInclude Include="Source\StringUtility.h" />
-    <ClInclude Include="Source\TextureDisplay.h" />
-    <ClInclude Include="Source\TextureManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{e77d9191-3617-4cc5-8267-bc1961085fcd}</ProjectGuid>
+    <ProjectGuid>{2E0A0231-0BAC-499F-8425-57DA0ADFB417}</ProjectGuid>
     <RootNamespace>GDPARCM</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Threading Workbench</ProjectName>
+    <ProjectName>Basic Thread Handling</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">

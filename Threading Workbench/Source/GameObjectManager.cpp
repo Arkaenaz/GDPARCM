@@ -6,7 +6,7 @@ GameObjectManager* GameObjectManager::getInstance() {
 	if (P_SHARED_INSTANCE == nullptr)
 	{
 		P_SHARED_INSTANCE = new GameObjectManager();
-		P_SHARED_INSTANCE->gameObjectList.reserve(100);
+		P_SHARED_INSTANCE->gameObjectList.reserve(500);
 	}
 
 	return P_SHARED_INSTANCE;

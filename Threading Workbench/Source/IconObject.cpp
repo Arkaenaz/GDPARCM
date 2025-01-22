@@ -11,6 +11,8 @@ IconObject::IconObject(std::string name, int textureIndex) : AGameObject(name)
 void IconObject::initialize()
 {
 	sf::Texture* texture = TextureManager::getInstance()->getStreamTexture(this->textureIndex);
+	if (texture == nullptr)
+		return;
 	this->sprite = new sf::Sprite(*texture);
 }
 
