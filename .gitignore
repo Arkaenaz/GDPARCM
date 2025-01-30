@@ -362,3 +362,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Over 100 MB DLLs
+ASYNC - Ray Tracing in One Weekend/opencv_world4100d.dll

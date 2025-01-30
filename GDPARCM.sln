@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Threading Workbench", "Thre
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Basic Thread Handling", "Basic Thread Handling\Basic Thread Handling.vcxproj", "{2E0A0231-0BAC-499F-8425-57DA0ADFB417}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Basic Thread Handling", "ASYNC - Ray Tracing in One Weekend\Ray Tracing in One Weekend.vcxproj", "{E37306A9-A1E0-443A-93C9-94F51BED8416}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{2E0A0231-0BAC-499F-8425-57DA0ADFB417}.Debug|x64.Build.0 = Debug|x64
 		{2E0A0231-0BAC-499F-8425-57DA0ADFB417}.Release|x64.ActiveCfg = Release|x64
 		{2E0A0231-0BAC-499F-8425-57DA0ADFB417}.Release|x64.Build.0 = Release|x64
+		{E37306A9-A1E0-443A-93C9-94F51BED8416}.Debug|x64.ActiveCfg = Debug|x64
+		{E37306A9-A1E0-443A-93C9-94F51BED8416}.Debug|x64.Build.0 = Debug|x64
+		{E37306A9-A1E0-443A-93C9-94F51BED8416}.Release|x64.ActiveCfg = Release|x64
+		{E37306A9-A1E0-443A-93C9-94F51BED8416}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
