@@ -364,4 +364,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Over 100 MB DLLs
-ASYNC - Ray Tracing in One Weekend/opencv_world4100d.dll
+*/opencv_world4100d.dll
