@@ -41,14 +41,14 @@ public:
         std::wcout << L"Time Started : " << timeString << "\n";
 
         bool window = true;
+        int numThreads = 8;
 
+        const int windowWidth = rint(image_width / numThreads);
+        const int windowHeight = rint(image_height / numThreads);
         if (window)
         {
             int id = 0;
-            int numThreads = 4;
-
-            const int windowWidth = rint(image_width / numThreads);
-            const int windowHeight = rint(image_height / numThreads);
+            
 
             int lXOffset = 0;
             int lYOffset = 0;
@@ -103,19 +103,16 @@ public:
         std::clog << "Threads finished: 0" << ' ' << std::flush;
         while (standby)
         {
-            int pixels = 0;
-            int running = 0;
 	        for (int i = 0; i < runningThreads.size(); i++)
 	        {
                 standby = false;
                 if (runningThreads[i]->isRunning())
                 {
-                    //std::clog << "\rThreads finished: " << running << ' ' << std::flush;
                     standby = true;
-                    //break;
+                    int pixels = runningThreads[i]->getPixelsRendered();
+                    std::clog << "\rPixels rendered of thread " << i << ": " << pixels << " of " << windowWidth * windowHeight << ' ' << std::flush;
+                    break;
                 }
-                pixels += runningThreads[i]->getPixelsRendered();
-                std::clog << "\rPixels rendered: " << pixels << " of " << image_width * image_height << ' ' << std::flush;
 	        }
             
         }
