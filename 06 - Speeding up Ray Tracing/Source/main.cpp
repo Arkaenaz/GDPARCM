@@ -110,7 +110,7 @@ int main()
     cam.vup = vec3(0, 1, 0);
 
     //cam.defocus_angle = 0.1; // test case 3
-    cam.defocus_angle = 0.6;// test case 1
+    cam.defocus_angle = 0.0;// test case 1
     //cam.defocus_angle = 4; // test case 2
     cam.focus_dist = 10.0;
 
