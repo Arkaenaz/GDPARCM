@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source\Threading">
+      <UniqueIdentifier>{087296b7-3c48-4cc4-97d4-f8f8f2404f7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Math">
+      <UniqueIdentifier>{4d33b448-f801-4e1a-80b7-678c7a3c1fa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\OpenCV">
+      <UniqueIdentifier>{960699fc-f63f-40db-9592-f0ec20f71809}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Raytracing">
+      <UniqueIdentifier>{fa6e515a-681f-41ea-8b16-f65e2d11619c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Threading\RayTracingThread.cpp">
+      <Filter>Source\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Threading\IETThread.cpp">
+      <Filter>Source\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RTImage.cpp">
+      <Filter>Source\OpenCV</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\pch.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Threading\RayTracingThread.h">
+      <Filter>Source\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Threading\IETThread.h">
+      <Filter>Source\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\vec3.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\color.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RTImage.h">
+      <Filter>Source\OpenCV</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ray.h">
+      <Filter>Source\Raytracing</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\hittable.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\sphere.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\hittable_list.h" />
+    <ClInclude Include="Source\interval.h" />
+    <ClInclude Include="Source\camera.h" />
+    <ClInclude Include="Source\material.h" />
+  </ItemGroup>
+</Project>
