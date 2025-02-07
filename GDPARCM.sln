@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "04 - A Barrage of Threads",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "05 - A Barrage of Threads (Solution)", "05 - A Barrage of Threads (Solution)\05 - A Barrage of Threads (Solution).vcxproj", "{72E02FE1-52FA-44F0-9B54-2545492B8E2B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03 - Ray Tracing in One Weekend", "06 - Speeding up Ray Tracing\06 - Speeding up Ray Tracing.vcxproj", "{DB7BDCEC-DDEC-4BCD-91D5-4EF9E9309ED4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -39,6 +41,10 @@ Global
 		{72E02FE1-52FA-44F0-9B54-2545492B8E2B}.Debug|x64.Build.0 = Debug|x64
 		{72E02FE1-52FA-44F0-9B54-2545492B8E2B}.Release|x64.ActiveCfg = Release|x64
 		{72E02FE1-52FA-44F0-9B54-2545492B8E2B}.Release|x64.Build.0 = Release|x64
+		{DB7BDCEC-DDEC-4BCD-91D5-4EF9E9309ED4}.Debug|x64.ActiveCfg = Debug|x64
+		{DB7BDCEC-DDEC-4BCD-91D5-4EF9E9309ED4}.Debug|x64.Build.0 = Debug|x64
+		{DB7BDCEC-DDEC-4BCD-91D5-4EF9E9309ED4}.Release|x64.ActiveCfg = Release|x64
+		{DB7BDCEC-DDEC-4BCD-91D5-4EF9E9309ED4}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
