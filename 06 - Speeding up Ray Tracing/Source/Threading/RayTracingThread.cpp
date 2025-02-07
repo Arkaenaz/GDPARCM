@@ -28,7 +28,7 @@ void RayTracingThread::run()
 {
     this->running = true;
 
-    std::string fileName = "image.png";
+    //std::string fileName = "image.png";
 
     for (int j = lowerYBound; j < upperYBound; j++)
     {
@@ -44,7 +44,7 @@ void RayTracingThread::run()
             const float b = static_cast<float>(pixel_color.z());
 
             this->image->setPixel(i, j, r, g, b, cam->samples_per_pixel);
-            this->image->saveImage(fileName);
+            //this->image->saveImage(fileName);
         }
     }
 

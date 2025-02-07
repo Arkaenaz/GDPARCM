@@ -29,7 +29,11 @@ public:
         RTImage* rtImage = new RTImage(image_width, image_height);
 
         std::vector<RayTracingThread*> runningThreads;
-        std::vector<RayTracingThread*> inactiveThread;
+
+        auto start = std::chrono::system_clock::now();
+        std::time_t start_time = std::chrono::system_clock::to_time_t(start);
+
+        std::cout << "Time Started : " << std::ctime(&start_time) << "\n";
 
         bool window = true;
 
@@ -86,7 +90,8 @@ public:
             //std::cout << "Detaching Thread #" << i << "\n";
             runningThreads[i]->start();
         }
-        std::cout << "Threads running: " << runningThreads.size() << "\n";
+
+        std::cout << "Threads started: " << runningThreads.size() << "\n";
         /*bool standby = true;
         while (standby)
         {
