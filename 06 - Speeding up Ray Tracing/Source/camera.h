@@ -30,17 +30,22 @@ public:
 
         std::vector<RayTracingThread*> runningThreads;
 
-        auto start = std::chrono::system_clock::now();
-        std::time_t start_time = std::chrono::system_clock::to_time_t(start);
+        time_t now = time(0);
+        tm ltm;
+        localtime_s(&ltm, &now);
+        std::wstringstream wss;
+        wss << std::put_time(&ltm, L"%T");
 
-        std::cout << "Time Started : " << std::ctime(&start_time) << "\n";
+        std::wstring timeString = wss.str();
+
+        std::wcout << L"Time Started : " << timeString << "\n";
 
         bool window = true;
 
         if (window)
         {
             int id = 0;
-            int numThreads = 64;
+            int numThreads = 4;
 
             const int windowWidth = rint(image_width / numThreads);
             const int windowHeight = rint(image_height / numThreads);
@@ -92,41 +97,41 @@ public:
         }
 
         std::cout << "Threads started: " << runningThreads.size() << "\n";
-        /*bool standby = true;
-        while (standby)
-        {
-            for (int i = 0; i < threads.size(); i++)
-            {
-                standby = false;
-                if (!threads[i]->isRunning())
-                {
-                    standby = true;
-                    break;
-                }
-            }
-        }*/
 
         bool standby = true;
 
         std::clog << "Threads finished: 0" << ' ' << std::flush;
         while (standby)
         {
+            int pixels = 0;
             int running = 0;
 	        for (int i = 0; i < runningThreads.size(); i++)
 	        {
                 standby = false;
                 if (runningThreads[i]->isRunning())
                 {
-                    std::clog << "\rThreads finished: " << running << ' ' << std::flush;
+                    //std::clog << "\rThreads finished: " << running << ' ' << std::flush;
                     standby = true;
-                    break;
+                    //break;
                 }
+                pixels += runningThreads[i]->getPixelsRendered();
+                std::clog << "\rPixels rendered: " << pixels << " of " << image_width * image_height << ' ' << std::flush;
 	        }
+            
         }
 
         rtImage->flipImage();
         rtImage->saveImage(fileName);
+
         std::clog << "\rDone.                 \n";
+
+        now = time(0);
+        localtime_s(&ltm, &now);
+        wss << std::put_time(&ltm, L"%T");
+
+        timeString = wss.str();
+
+        std::wcout << L"Time Ended : " << timeString << "\n";
     }
 
 private:

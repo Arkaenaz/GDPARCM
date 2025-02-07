@@ -14,6 +14,7 @@ public:
 
 	void dismiss();
 	bool isRunning();
+	int getPixelsRendered();
 
 protected:
 	void run() override;
@@ -31,5 +32,7 @@ private:
 	int lowerYBound;
 	int upperXBound;
 	int upperYBound;
+
+	int pixelsRendered;
 };
 
