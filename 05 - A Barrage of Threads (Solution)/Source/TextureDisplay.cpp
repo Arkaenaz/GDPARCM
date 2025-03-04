@@ -58,7 +58,7 @@ namespace IET {
 		float y = static_cast<float>(this->rowGrid * IMG_HEIGHT);
 		iconObj->setPosition(x, y);
 
-		std::cout << "Set position: " << x << " " << y << std::endl;
+		//std::cout << "Set position: " << x << " " << y << std::endl;
 
 		this->columnGrid++;
 		if (this->columnGrid == this->MAX_COLUMN)

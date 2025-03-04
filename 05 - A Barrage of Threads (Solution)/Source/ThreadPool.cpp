@@ -5,10 +5,10 @@
 
 namespace IET
 {
-	ThreadPool::ThreadPool(String name, int numWorkers) :
-		name(name),
-		numWorkers(numWorkers)
+	ThreadPool::ThreadPool(String name, int numWorkers)
 	{
+		this->name = name;
+		this->numWorkers = numWorkers;
 		for (int i = 0; i < this->numWorkers; i++)
 		{
 			this->inactiveThreads.push(new PoolWorkerThread(i, this));
@@ -45,9 +45,9 @@ namespace IET
 	{
 		while (this->running)
 		{
-			if (!this->pendingActions.empty())
+			if (this->pendingActions.empty() == false)
 			{
-				if (!this->inactiveThreads.empty())
+				if (this->inactiveThreads.empty() == false)
 				{
 					PoolWorkerThread* workerThread = this->inactiveThreads.front();
 					this->inactiveThreads.pop();

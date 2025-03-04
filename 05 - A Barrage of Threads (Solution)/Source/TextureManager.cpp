@@ -9,7 +9,7 @@ namespace IET {
 	TextureManager::TextureManager()
 	{
 		this->countStreamingAssets();
-		this->threadPool = new ThreadPool("Texture Manager Thread Pool", 12);
+		this->threadPool = new ThreadPool("Texture Manager Thread Pool", 6);
 		this->threadPool->startScheduler();
 	}
 
@@ -109,10 +109,11 @@ namespace IET {
 	void TextureManager::instantiateAsTexture(String path, String assetName, bool isStreaming)
 	{
 		sf::Texture* texture = new sf::Texture();
-		if (texture->loadFromFile(path))
+		texture->loadFromFile(path);
+		/*if (texture->loadFromFile(path))
 		{
 			// Error
-		}
+		}*/
 		textureMap[assetName].push_back(texture);
 
 		if (isStreaming)

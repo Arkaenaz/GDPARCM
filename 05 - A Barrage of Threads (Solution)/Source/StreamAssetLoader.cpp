@@ -26,14 +26,14 @@ namespace IET {
 		std::random_device seeder;
 		std::mt19937 engine(seeder());
 		std::uniform_int_distribution<int> dist(1000, 4000);
-		IETThread::sleep(dist(engine));
+		IETThread::sleep(1000);
 
 		std::vector<String> tokens = StringUtility::split(path, '/');
 		String assetName = StringUtility::split(tokens[tokens.size() - 1], '.')[0];
 
 		TextureManager::getInstance()->instantiateAsTexture(path, assetName, true);
 
-		std::cout << "[TextureManager] Loaded streaming texture: " << assetName << std::endl;
+		//std::cout << "[TextureManager] Loaded streaming texture: " << assetName << std::endl;
 
 		this->execEvent->onFinishedExecution();
 		//delete after being done

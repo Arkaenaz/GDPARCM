@@ -33,7 +33,7 @@ namespace IET {
 
 	void GameObjectManager::update(sf::Time deltaTime)
 	{
-		this->guard.lock();
+		//this->guard.lock();
 
 		for (AGameObject* pGameObject : this->gameObjectList)
 		{
@@ -41,7 +41,7 @@ namespace IET {
 				pGameObject->update(deltaTime);
 		}
 
-		this->guard.unlock();
+		//this->guard.unlock();
 	}
 
 	void GameObjectManager::draw(sf::RenderWindow* window) {
@@ -54,13 +54,13 @@ namespace IET {
 
 	void GameObjectManager::addObject(AGameObject* gameObject)
 	{
-		guard.lock();
+		//guard.lock();
 
 		this->gameObjectMap[gameObject->getName()] = gameObject;
 		this->gameObjectList.push_back(gameObject);
 		this->gameObjectMap[gameObject->getName()]->initialize();
 
-		guard.unlock();
+		//guard.unlock();
 	}
 
 	void GameObjectManager::deleteObject(AGameObject* gameObject)
@@ -92,6 +92,6 @@ namespace IET {
 
 	GameObjectManager::GameObjectManager()
 	{
-		this->gameObjectList.reserve(1024);
+		this->gameObjectList.reserve(500);
 	}
 }

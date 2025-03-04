@@ -50,7 +50,7 @@ namespace IET {
 			}
 			render();
 		}*/
-		sf::Clock clock;
+		/*sf::Clock clock;
 		sf::Time previousTime = clock.getElapsedTime();
 		sf::Time currentTime;
 		while (this->window.isOpen())
@@ -66,6 +66,25 @@ namespace IET {
 			previousTime = currentTime;
 
 
+		}*/
+
+		const sf::Clock clock = sf::Clock::Clock();
+		sf::Time previousDeltaTime = sf::Time::Zero;
+
+		while (this->window.isOpen())
+		{
+			const sf::Time currentDeltaTime = clock.getElapsedTime();
+			const sf::Time deltaTime = currentDeltaTime - previousDeltaTime;
+			this->fps = floor(1.0f / deltaTime.asSeconds());
+			//this->window.clear();
+
+			processEvents();
+			update(deltaTime);
+			render();
+
+			//this->window.display();
+
+			previousDeltaTime = currentDeltaTime;
 		}
 	}
 
