@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source\GameObjects">
+      <UniqueIdentifier>{d4bb26ca-73d8-46b3-8903-85d8fa822a55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Textures">
+      <UniqueIdentifier>{8a48a8f9-b6ac-4e19-b0b1-5a33f082c67b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Utility">
+      <UniqueIdentifier>{087296b7-3c48-4cc4-97d4-f8f8f2404f7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Threading">
+      <UniqueIdentifier>{a1a1782e-7a71-4eb0-a1a9-276a6b68b919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Interfaces">
+      <UniqueIdentifier>{e766877d-591a-4acc-a463-28bc6228d9f7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\BaseRunner.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\AGameObject.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\GameObjectManager.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\BackgroundObject.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\TextureManager.cpp">
+      <Filter>Source\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\IconObject.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\FPSCounter.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\TextureDisplay.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\StringUtility.cpp">
+      <Filter>Source\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\pch.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Threading\HelloWorldThread.cpp">
+      <Filter>Source\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Threading\IETThread.cpp">
+      <Filter>Source\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Threading\StreamAssetLoader.cpp">
+      <Filter>Source\Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Threading\ThreadPool.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Threading\PoolWorkerThread.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\Debug.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Threading\BusyWaitSemaphore.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Threading\IETSemaphore.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\BaseRunner.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\AGameObject.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\GameObjectManager.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\pch.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\BackgroundObject.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\TextureManager.h">
+      <Filter>Source\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\IconObject.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\FPSCounter.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\TextureDisplay.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\StringUtility.h">
+      <Filter>Source\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Threading\HelloWorldThread.h">
+      <Filter>Source\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Threading\IETThread.h">
+      <Filter>Source\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Threading\StreamAssetLoader.h">
+      <Filter>Source\Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Interfaces\IExecutionEvent.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Interfaces\NonCopyable.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Interfaces\Singleton.h">
+      <Filter>Source\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Threading\ThreadPool.h" />
+    <ClInclude Include="Source\Interfaces\IWorkerAction.h" />
+    <ClInclude Include="Source\Threading\PoolWorkerThread.h" />
+    <ClInclude Include="Source\Utility\Debug.h" />
+    <ClInclude Include="Source\Threading\BusyWaitSemaphore.h" />
+    <ClInclude Include="Source\Threading\IETSemaphore.h" />
+  </ItemGroup>
+</Project>
