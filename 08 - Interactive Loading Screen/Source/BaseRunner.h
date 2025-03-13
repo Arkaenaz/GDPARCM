@@ -18,6 +18,8 @@ namespace IET {
 		BaseRunner();
 		void run();
 
+		sf::RenderWindow& getWindow();
+
 	private:
 		sf::RenderWindow			window;
 

@@ -5,6 +5,7 @@
 
 namespace IET {
 	class IconObject;
+	class LoadingDisplay;
 	class TextureDisplay : public AGameObject, public IExecutionEvent
 	{
 	public:
@@ -17,6 +18,9 @@ namespace IET {
 		void onFinishedExecution() override;
 
 	private:
+		LoadingDisplay* loadingDisplay;
+		sf::Music* music;
+
 		typedef std::vector<IconObject*> IconList;
 		IconList iconList;
 
@@ -26,7 +30,7 @@ namespace IET {
 
 		enum StreamingType { BATCH_LOAD = 0, SINGLE_STREAM = 1 };
 
-		const float STREAMING_LOAD_DELAY = 100.0f;
+		const float STREAMING_LOAD_DELAY = 50;
 		const StreamingType streamingType = SINGLE_STREAM;
 
 		Mutex guard; //used to avoid possible race conditions when spawning objects. Not really required for this exercise. Will be explained in future lessons.

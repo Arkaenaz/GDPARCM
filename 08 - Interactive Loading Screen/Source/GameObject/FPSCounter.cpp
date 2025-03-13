@@ -21,7 +21,7 @@ namespace IET
 	void FPSCounter::initialize()
 	{
 		sf::Font* font = new sf::Font();
-		if (font->openFromFile("Source/Media/Sansation.ttf"))
+		if (font->openFromFile("Source/Media/Kazesawa-Regular.ttf"))
 		{
 
 		}

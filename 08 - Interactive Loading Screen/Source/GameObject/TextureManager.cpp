@@ -9,6 +9,7 @@ namespace IET {
 	TextureManager::TextureManager()
 	{
 		this->countStreamingAssets();
+		this->countVideoStreamingAssets();
 		this->threadPool = new ThreadPool("Texture Manager Thread Pool", 8);
 		this->threadPool->startScheduler();
 	}
@@ -24,6 +25,32 @@ namespace IET {
 			std::vector<String> tokens = StringUtility::split(path, '/');
 			String assetName = StringUtility::split(tokens[tokens.size() - 1], '.')[0];
 			this->instantiateAsTexture(path, assetName, false);
+			Debug::Log(this, "Loaded texture: " + assetName);
+		}
+
+		for (const auto& entry : std::filesystem::directory_iterator(BACKGROUND_IMAGE_PATH))
+		{
+			std::vector<String> tokens = StringUtility::split(entry.path().generic_string(), '/');
+			String assetName = StringUtility::split(tokens[tokens.size() - 1], '.')[0];
+			instantiateAsTextureList(entry.path().generic_string(), assetName, backgroundTextureList);
+
+			Debug::Log(this, "Loaded texture: " + assetName);
+		}
+
+		for (const auto& entry : std::filesystem::directory_iterator(PARALLAX_IMAGE_PATH))
+		{
+			std::vector<String> tokens = StringUtility::split(entry.path().generic_string(), '/');
+			String assetName = StringUtility::split(tokens[tokens.size() - 1], '.')[0];
+			instantiateAsTextureList(entry.path().generic_string(), assetName, parallaxTextureList);
+
+			Debug::Log(this, "Loaded texture: " + assetName);
+		}
+
+		for (const auto& entry : std::filesystem::directory_iterator(CHARACTER_IMAGE_PATH))
+		{
+			std::vector<String> tokens = StringUtility::split(entry.path().generic_string(), '/');
+			String assetName = StringUtility::split(tokens[tokens.size() - 1], '.')[0];
+			instantiateAsTextureList(entry.path().generic_string(), assetName, characterTextureList);
 			Debug::Log(this, "Loaded texture: " + assetName);
 		}
 	}
@@ -114,6 +141,21 @@ namespace IET {
 		return this->videoStreamTextureList[index];
 	}
 
+	sf::Texture* TextureManager::getBackgroundFromList(const int index) const
+	{
+		return this->backgroundTextureList[index];
+	}
+
+	sf::Texture* TextureManager::getParallaxFromList(const int index) const
+	{
+		return this->parallaxTextureList[index];
+	}
+
+	sf::Texture* TextureManager::getCharacterFromList(const int index) const
+	{
+		return this->characterTextureList[index];
+	}
+
 	int TextureManager::getNumLoadedStreamTextures() const
 	{
 		return static_cast<int>(this->streamTextureList.size());
@@ -127,7 +169,7 @@ namespace IET {
 	void TextureManager::countStreamingAssets()
 	{
 		streamingAssetCount = 0;
-		for (const auto& entry : std::filesystem::directory_iterator(VIDEO_STREAMING_PATH))
+		for (const auto& entry : std::filesystem::directory_iterator(STREAMING_PATH))
 		{
 			streamingAssetCount++;
 		}
@@ -152,6 +194,34 @@ namespace IET {
 		{
 			baseTextureList.push_back(texture);
 		}
+	}
 
+	void TextureManager::instantiateAsTextureList(const String& path, const String& assetName, TextureList& list)
+	{
+		sf::Texture* texture = new sf::Texture();
+		if (!texture->loadFromFile(path))
+		{
+			Debug::LogError("Texture not found from path: " + path);
+		}
+		this->textureMap[assetName].push_back(texture);
+
+		list.push_back(texture);
+
+	}
+
+	int TextureManager::getVideoStreamingAssets()
+	{
+		return this->videoStreamingAssetCount;
+	}
+
+	void TextureManager::countVideoStreamingAssets()
+	{
+		videoStreamingAssetCount = 0;
+		for (const auto& entry : std::filesystem::directory_iterator(VIDEO_STREAMING_PATH))
+		{
+			videoStreamingAssetCount++;
+		}
+
+		Debug::Log(this, "Number of streaming assets: " + videoStreamingAssetCount);
 	}
 }

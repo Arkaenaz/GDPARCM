@@ -4,8 +4,9 @@
 #include "GameObject/GameObjectManager.h"
 #include "GameObject/TextureManager.h"
 
-#include "GameObject/BackgroundObject.h"
+#include "GameObject/SpriteObject.h"
 #include "GameObject/FPSCounter.h"
+#include "GameObject/LoadingDisplay.h"
 #include "GameObject/TextureDisplay.h"
 
 namespace IET {
@@ -26,14 +27,14 @@ namespace IET {
 		//load initial textures
 		TextureManager::getInstance()->loadFromAssetList();
 
-		FPSCounter* fpsCounter = new FPSCounter();
-		GameObjectManager::getInstance()->addObject(fpsCounter);
-
-		/*BackgroundObject* bgObject = new BackgroundObject("BGObject");
+		/*ScrollingBackground* bgObject = new ScrollingBackground("BGObject");
 		GameObjectManager::getInstance()->addObject(bgObject);*/
 
 		TextureDisplay* textureDisplay = new TextureDisplay();
 		GameObjectManager::getInstance()->addObject(textureDisplay);
+
+		FPSCounter* fpsCounter = new FPSCounter();
+		GameObjectManager::getInstance()->addObject(fpsCounter);
 	}
 
 	void BaseRunner::run()
@@ -52,6 +53,11 @@ namespace IET {
 
 			previousDeltaTime = currentDeltaTime;
 		}
+	}
+
+	sf::RenderWindow& BaseRunner::getWindow()
+	{
+		return this->window;
 	}
 
 	void BaseRunner::processEvents()

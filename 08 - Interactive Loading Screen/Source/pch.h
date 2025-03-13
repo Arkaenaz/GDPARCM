@@ -24,6 +24,7 @@
 #include <Windows.h>
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include "Utility/Debug.h"
 

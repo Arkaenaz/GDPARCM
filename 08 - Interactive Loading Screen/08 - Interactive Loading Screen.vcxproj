@@ -11,13 +11,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\GameObject\CharacterButton.cpp" />
+    <ClCompile Include="Source\GameObject\Button.cpp" />
     <ClCompile Include="Source\GameObject\LoadingDisplay.cpp" />
+    <ClCompile Include="Source\GameObject\ScrollingBackground.cpp" />
     <ClCompile Include="Source\Utility\FileUtility.cpp" />
     <ClCompile Include="Source\Threading\BusyWaitSemaphore.cpp" />
     <ClCompile Include="Source\Threading\IETSemaphore.cpp" />
     <ClCompile Include="Source\Threading\PoolWorkerThread.cpp" />
     <ClCompile Include="Source\pch.cpp" />
-    <ClCompile Include="Source\GameObject\BackgroundObject.cpp" />
+    <ClCompile Include="Source\GameObject\SpriteObject.cpp" />
     <ClCompile Include="Source\GameObject\AGameObject.cpp" />
     <ClCompile Include="Source\BaseRunner.cpp" />
     <ClCompile Include="Source\GameObject\FPSCounter.cpp" />
@@ -34,13 +37,17 @@
     <ClCompile Include="Source\Threading\ThreadPool.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\GameObject\CharacterButton.h" />
+    <ClInclude Include="Source\GameObject\Button.h" />
     <ClInclude Include="Source\GameObject\LoadingDisplay.h" />
+    <ClInclude Include="Source\GameObject\ScrollingBackground.h" />
+    <ClInclude Include="Source\Interfaces\IButtonListener.h" />
     <ClInclude Include="Source\Utility\FileUtility.h" />
     <ClInclude Include="Source\Threading\BusyWaitSemaphore.h" />
     <ClInclude Include="Source\Threading\IETSemaphore.h" />
     <ClInclude Include="Source\Utility\Debug.h" />
     <ClInclude Include="Source\Threading\PoolWorkerThread.h" />
-    <ClInclude Include="Source\GameObject\BackgroundObject.h" />
+    <ClInclude Include="Source\GameObject\SpriteObject.h" />
     <ClInclude Include="Source\GameObject\AGameObject.h" />
     <ClInclude Include="Source\BaseRunner.h" />
     <ClInclude Include="Source\GameObject\FPSCounter.h" />
@@ -54,6 +61,7 @@
     <ClInclude Include="Source\Threading\HelloWorldThread.h" />
     <ClInclude Include="Source\Threading\IETThread.h" />
     <ClInclude Include="Source\pch.h" />
+    <ClInclude Include="Source\Utility\MathUtility.h" />
     <ClInclude Include="Source\Utility\StringUtility.h" />
     <ClInclude Include="Source\GameObject\TextureDisplay.h" />
     <ClInclude Include="Source\GameObject\TextureManager.h" />
@@ -117,7 +125,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\Shared\SFML-3.0.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;opengl32.lib;freetype.lib;gdi32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-s-d.lib;sfml-window-s-d.lib;sfml-system-s-d.lib;sfml-audio-s-d.lib;opengl32.lib;freetype.lib;gdi32.lib;winmm.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -140,7 +148,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)\Shared\SFML-3.0.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;opengl32.lib;freetype.lib;gdi32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-graphics-s.lib;sfml-window-s.lib;sfml-system-s.lib;sfml-audio-s.lib;opengl32.lib;freetype.lib;gdi32.lib;winmm.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

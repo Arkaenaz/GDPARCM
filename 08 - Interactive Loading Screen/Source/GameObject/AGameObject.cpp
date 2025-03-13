@@ -43,6 +43,12 @@ namespace IET {
 		this->posY = y;
 	}
 
+	void AGameObject::setPosition(sf::Vector2f position)
+	{
+		this->posX = position.x;
+		this->posY = position.y;
+	}
+
 	void AGameObject::setScale(float x, float y)
 	{
 		this->scaleX = x;
@@ -63,5 +69,20 @@ namespace IET {
 	sf::Vector2f AGameObject::getScale()
 	{
 		return sf::Vector2f(this->scaleX, this->scaleY);
+	}
+
+	sf::Sprite* AGameObject::getSprite()
+	{
+		return this->sprite;
+	}
+
+	void AGameObject::setAlpha(uint8_t a)
+	{
+		this->sprite->setColor({ 255, 255, 255, a });
+	}
+
+	uint8_t AGameObject::getAlpha()
+	{
+		return this->sprite->getColor().a;
 	}
 }

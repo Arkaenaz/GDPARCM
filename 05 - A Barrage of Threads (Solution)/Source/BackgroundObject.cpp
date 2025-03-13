@@ -4,11 +4,11 @@
 #include "BaseRunner.h"
 
 namespace IET {
-	BackgroundObject::BackgroundObject(std::string name) : AGameObject(name)
+	ScrollingBackground::ScrollingBackground(std::string name) : AGameObject(name)
 	{
 	}
 
-	void BackgroundObject::initialize()
+	void ScrollingBackground::initialize()
 	{
 		std::cout << "Declared as " << this->getName() << "\n";
 
@@ -22,11 +22,11 @@ namespace IET {
 		this->setPosition(0, -BaseRunner::WINDOW_HEIGHT * 7);
 	}
 
-	void BackgroundObject::processInput(const Event event)
+	void ScrollingBackground::processInput(const Event event)
 	{
 	}
 
-	void BackgroundObject::update(sf::Time deltaTime)
+	void ScrollingBackground::update(sf::Time deltaTime)
 	{
 		sf::Vector2f position = this->getPosition();
 		position.y += this->SPEED_MULTIPLIER * deltaTime.asSeconds();

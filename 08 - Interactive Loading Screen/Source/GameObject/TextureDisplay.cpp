@@ -5,16 +5,21 @@
 #include "TextureManager.h"
 #include "GameObjectManager.h"
 #include "IconObject.h"
+#include "LoadingDisplay.h"
+#include "Utility/FileUtility.h"
 
 namespace IET {
 	TextureDisplay::TextureDisplay() : AGameObject("TextureDisplay")
 	{
-		iconList.reserve(512);
+		iconList.reserve(4096);
 	}
 
 	void TextureDisplay::initialize()
 	{
-		//LoadingDisplay
+		this->music = new sf::Music(FileUtility::getFileFromAssets("Audio/Something.mp3"));
+		this->loadingDisplay = new LoadingDisplay();
+		GameObjectManager::getInstance()->addObject(this->loadingDisplay);
+
 	}
 
 	void TextureDisplay::processInput(const Event event)
@@ -33,8 +38,14 @@ namespace IET {
 				TextureManager::getInstance()->loadSingleVideoStreamAsset(this->numDisplayed, this);
 				this->numDisplayed++;
 			}
+
+			this->isLoadingFinished = !this->loadingDisplay->isEnabled();
+			if (this->isLoadingFinished)
+				this->ticks = 0.0f;
 			return;
 		}
+		if (currentFrame == 1)
+			this->music->play();
 		/*this->ticks += BaseRunner::TIME_PER_FRAME.asMilliseconds();
 		if (this->streamingType == StreamingType::BATCH_LOAD && !this->startedStreaming && this->ticks > this->STREAMING_LOAD_DELAY)
 		{
@@ -50,7 +61,9 @@ namespace IET {
 		}*/
 
 		// Increment Icon
-		{
+		this->ticks += BaseRunner::TIME_PER_FRAME.asMilliseconds();
+		if (this->ticks >= 29.97f) {
+
 			currentFrame++;
 			if (currentFrame >= iconList.size())
 			{
@@ -78,6 +91,11 @@ namespace IET {
 	void TextureDisplay::onFinishedExecution()
 	{
 		this->spawnObject(); //executes spawn once the texture is ready.
+		this->loadingDisplay->setLoaded(this->iconList.size());
+		if (this->iconList.size() >= TextureManager::getInstance()->getVideoStreamingAssets())
+		{
+			this->loadingDisplay->startFadeOut();
+		}
 	}
 
 	void TextureDisplay::spawnObject()
@@ -111,10 +129,6 @@ namespace IET {
 		//GameObjectManager::getInstance()->addObject(iconObj);
 		*/
 
-		if (this->iconList.size() >= 324)
-		{
-			this->isLoadingFinished = true;
-		}
 		this->guard.unlock();
 	}
 }

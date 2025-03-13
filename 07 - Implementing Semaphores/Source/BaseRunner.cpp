@@ -24,7 +24,7 @@ namespace IET {
 		//load initial textures
 		TextureManager::getInstance()->loadFromAssetList();
 
-		BackgroundObject* bgObject = new BackgroundObject("BGObject");
+		ScrollingBackground* bgObject = new ScrollingBackground("BGObject");
 		GameObjectManager::getInstance()->addObject(bgObject);
 
 		FPSCounter* fpsCounter = new FPSCounter();

@@ -7,6 +7,7 @@
 #include "Interfaces/NonCopyable.h"
 
 namespace IET {
+	class AComponent;
 	class AGameObject : public NonCopyable
 	{
 	public:
@@ -24,13 +25,17 @@ namespace IET {
 		void setEnabled(const bool enabled);
 		
 		virtual void setPosition(float x, float y);
+		virtual void setPosition(sf::Vector2f position);
 		virtual void setScale(float x, float y);
 		virtual void setScale(float scale);
 		
 		//virtual sf::FloatRect getLocalBounds();
 		virtual sf::Vector2f getPosition();
 		virtual sf::Vector2f getScale();
-		
+
+		sf::Sprite* getSprite();
+		void setAlpha(uint8_t a);
+		uint8_t getAlpha();
 	protected:
 		bool enabled;
 

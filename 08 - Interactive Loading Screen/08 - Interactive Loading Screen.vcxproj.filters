@@ -38,7 +38,7 @@
     <ClCompile Include="Source\GameObject\GameObjectManager.cpp">
       <Filter>Source\GameObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Source\GameObject\BackgroundObject.cpp">
+    <ClCompile Include="Source\GameObject\SpriteObject.cpp">
       <Filter>Source\GameObjects</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameObject\TextureManager.cpp">
@@ -90,6 +90,15 @@
       <Filter>Source\Application</Filter>
     </ClCompile>
     <ClCompile Include="Source\GameObject\LoadingDisplay.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\ScrollingBackground.cpp">
+      <Filter>Source\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\Button.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\GameObject\CharacterButton.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>
@@ -103,7 +112,7 @@
     <ClInclude Include="Source\pch.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObject\BackgroundObject.h">
+    <ClInclude Include="Source\GameObject\SpriteObject.h">
       <Filter>Source\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="Source\GameObject\TextureManager.h">
@@ -163,6 +172,15 @@
     <ClInclude Include="Source\BaseRunner.h">
       <Filter>Source\Application</Filter>
     </ClInclude>
-    <ClInclude Include="Source\GameObject\LoadingDisplay.h" />
+    <ClInclude Include="Source\GameObject\LoadingDisplay.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\GameObject\ScrollingBackground.h">
+      <Filter>Source\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\MathUtility.h" />
+    <ClInclude Include="Source\GameObject\Button.h" />
+    <ClInclude Include="Source\GameObject\CharacterButton.h" />
+    <ClInclude Include="Source\Interfaces\IButtonListener.h" />
   </ItemGroup>
 </Project>

@@ -5,10 +5,10 @@
 #include "AGameObject.h"
 
 namespace IET {
-	class BackgroundObject : public AGameObject
+	class ScrollingBackground : public AGameObject
 	{
 	public:
-		BackgroundObject(String name);
+		ScrollingBackground(String name);
 		void initialize() override;
 		void processInput(Event event) override;
 		void update(sf::Time deltaTime) override;

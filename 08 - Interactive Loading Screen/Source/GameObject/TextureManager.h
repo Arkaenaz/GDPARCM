@@ -25,27 +25,42 @@ namespace IET
 
 		sf::Texture* getStreamTextureFromList(const int index) const;
 		sf::Texture* getVideoStreamTextureFromList(const int index) const;
+		sf::Texture* getBackgroundFromList(const int index) const;
+		sf::Texture* getParallaxFromList(const int index) const;
+		sf::Texture* getCharacterFromList(const int index) const;
+
 		int getNumLoadedStreamTextures() const;
 		int getNumLoadedVideoStreamTextures() const;
 
 		void instantiateAsTexture(const String& path, const String& assetName, bool isStreaming);
+		void instantiateAsTextureList(const String& path, const String& assetName, TextureList& list);
 
+		int getVideoStreamingAssets();
 	private:
 		friend class Singleton;
 
 		TextureManager();
 		void countStreamingAssets();
+		void countVideoStreamingAssets();
 
 		const std::string STREAMING_PATH = "Source/Media/Streaming/";
 		const std::string VIDEO_STREAMING_PATH = "Source/Media/Video Streaming/";
+		const std::string BACKGROUND_IMAGE_PATH = "Source/Media/Background/";
+		const std::string PARALLAX_IMAGE_PATH = "Source/Media/Parallax/";
+		const std::string CHARACTER_IMAGE_PATH = "Source/Media/Character/";
 
 		ThreadPool* threadPool;
 
 		TextureMap textureMap;
 		TextureList baseTextureList;
 		TextureList streamTextureList;
+
 		TextureList videoStreamTextureList;
+		TextureList backgroundTextureList;
+		TextureList parallaxTextureList;
+		TextureList characterTextureList;
 
 		int streamingAssetCount = 0;
+		int videoStreamingAssetCount = 0;
 	};
 }
