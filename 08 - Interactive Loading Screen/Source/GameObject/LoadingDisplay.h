@@ -5,6 +5,7 @@
 
 namespace IET {
 	class SpriteObject;
+	class RectangleObject;
 	class LoadingDisplay : public AGameObject, public IButtonListener
 	{
 	public:
@@ -15,21 +16,28 @@ namespace IET {
 		void draw(sf::RenderTarget& renderTarget, sf::RenderStates renderStates) override;
 
 		void updateAssets();
+		void updateParallax(sf::Time deltaTime);
+		void disableAllAssets();
+
 		void startFadeIn();
 		void startFadeOut();
 		void startFadeBetweenAssets();
-		void disable();
+
+		void fadeAssets(float value);
+		void fadeBetweenAssets(float value);
 
 		void onClick(Button* pButton);
 		void onHover(Button* pButton);
 		void onRelease(Button* pButton);
 		void reset(Button* pButton);
 
-		void setLoaded(int loaded);
+		void setNumLoaded(int numLoaded);
+
 	private:
 		std::vector<SpriteObject*> backgroundObjects;
 		std::vector<SpriteObject*> parallaxObjects;
 		std::vector<SpriteObject*> characterObjects;
+		std::vector<SpriteObject*> readableObjects;
 		std::vector<Button*> characterButtons;
 
 		Button* leftButton;
@@ -43,6 +51,7 @@ namespace IET {
 		SpriteObject* currentBackground;
 		SpriteObject* currentCharacter;
 		SpriteObject* currentParallax;
+		SpriteObject* currentReadable;
 
 		SpriteObject* previousBackground;
 		SpriteObject* previousCharacter;
@@ -58,11 +67,14 @@ namespace IET {
 
 		float value = 100;
 
-		int loaded = 0;
+		int numLoaded = 0;
 
 		bool fadingOut = false;
 		bool fadingIn = false;
 		bool fadeBetween = false;
+
+		bool fadeInRead = false;
 		bool reading = false;
+		bool fadeOutRead = false;
 	};
 }

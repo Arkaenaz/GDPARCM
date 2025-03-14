@@ -8,6 +8,7 @@
 #include "GameObject/FPSCounter.h"
 #include "GameObject/LoadingDisplay.h"
 #include "GameObject/TextureDisplay.h"
+#include "Utility/FileUtility.h"
 
 namespace IET {
 	const sf::Time BaseRunner::TIME_PER_FRAME = sf::seconds(1.f / FRAME_RATE_LIMIT);
@@ -29,6 +30,9 @@ namespace IET {
 
 		/*ScrollingBackground* bgObject = new ScrollingBackground("BGObject");
 		GameObjectManager::getInstance()->addObject(bgObject);*/
+
+		SpriteObject* background = new SpriteObject("Background", new sf::Texture(FileUtility::getFileFromTextures("DisplayBackground.png")));
+		GameObjectManager::getInstance()->addObject(background);
 
 		TextureDisplay* textureDisplay = new TextureDisplay();
 		GameObjectManager::getInstance()->addObject(textureDisplay);

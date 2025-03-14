@@ -4,6 +4,8 @@
 #include "Interfaces/IExecutionEvent.h"
 
 namespace IET {
+	class StreamAssetLoader;
+	class SpriteObject;
 	class IconObject;
 	class LoadingDisplay;
 	class TextureDisplay : public AGameObject, public IExecutionEvent
@@ -18,6 +20,7 @@ namespace IET {
 		void onFinishedExecution() override;
 
 	private:
+		StreamAssetLoader* streamAssetLoader;
 		LoadingDisplay* loadingDisplay;
 		sf::Music* music;
 
@@ -30,7 +33,7 @@ namespace IET {
 
 		enum StreamingType { BATCH_LOAD = 0, SINGLE_STREAM = 1 };
 
-		const float STREAMING_LOAD_DELAY = 10.0f;
+		const float STREAMING_LOAD_DELAY = 80.0f;
 		const StreamingType streamingType = SINGLE_STREAM;
 
 		Mutex guard; //used to avoid possible race conditions when spawning objects. Not really required for this exercise. Will be explained in future lessons.

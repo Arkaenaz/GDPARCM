@@ -14,6 +14,7 @@
     <ClCompile Include="Source\GameObject\CharacterButton.cpp" />
     <ClCompile Include="Source\GameObject\Button.cpp" />
     <ClCompile Include="Source\GameObject\LoadingDisplay.cpp" />
+    <ClCompile Include="Source\GameObject\RectangleObject.cpp" />
     <ClCompile Include="Source\GameObject\ScrollingBackground.cpp" />
     <ClCompile Include="Source\Utility\FileUtility.cpp" />
     <ClCompile Include="Source\Threading\BusyWaitSemaphore.cpp" />
@@ -40,6 +41,7 @@
     <ClInclude Include="Source\GameObject\CharacterButton.h" />
     <ClInclude Include="Source\GameObject\Button.h" />
     <ClInclude Include="Source\GameObject\LoadingDisplay.h" />
+    <ClInclude Include="Source\GameObject\RectangleObject.h" />
     <ClInclude Include="Source\GameObject\ScrollingBackground.h" />
     <ClInclude Include="Source\Interfaces\IButtonListener.h" />
     <ClInclude Include="Source\Utility\FileUtility.h" />

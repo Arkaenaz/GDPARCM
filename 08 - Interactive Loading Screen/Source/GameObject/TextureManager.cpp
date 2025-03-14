@@ -53,6 +53,14 @@ namespace IET {
 			instantiateAsTextureList(entry.path().generic_string(), assetName, characterTextureList);
 			Debug::Log(this, "Loaded texture: " + assetName);
 		}
+
+		for (const auto& entry : std::filesystem::directory_iterator(READABLE_IMAGE_PATH))
+		{
+			std::vector<String> tokens = StringUtility::split(entry.path().generic_string(), '/');
+			String assetName = StringUtility::split(tokens[tokens.size() - 1], '.')[0];
+			instantiateAsTextureList(entry.path().generic_string(), assetName, readableTextureList);
+			Debug::Log(this, "Loaded texture: " + assetName);
+		}
 	}
 
 	void TextureManager::loadStreamingAssets()
@@ -156,6 +164,11 @@ namespace IET {
 		return this->characterTextureList[index];
 	}
 
+	sf::Texture* TextureManager::getReadableFromList(const int index) const
+	{
+		return this->readableTextureList[index];
+	}
+
 	int TextureManager::getNumLoadedStreamTextures() const
 	{
 		return static_cast<int>(this->streamTextureList.size());
@@ -184,15 +197,15 @@ namespace IET {
 		{
 			Debug::LogError("Texture not found from path: " + path);
 		}
-		textureMap[assetName].push_back(texture);
+		textureMap[assetName].push_back(std::move(texture));
 
 		if (isStreaming)
 		{
-			videoStreamTextureList.push_back(texture);
+			videoStreamTextureList.push_back(std::move(texture));
 		}
 		else
 		{
-			baseTextureList.push_back(texture);
+			baseTextureList.push_back(std::move(texture));
 		}
 	}
 

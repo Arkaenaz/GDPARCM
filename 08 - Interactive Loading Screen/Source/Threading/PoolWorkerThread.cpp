@@ -6,10 +6,9 @@
 
 namespace IET
 {
-	PoolWorkerThread::PoolWorkerThread(int id, IFinishedTask* finishedTask)
+	PoolWorkerThread::PoolWorkerThread(int id, IFinishedTask* finishedTask) :
+		id(std::move(id)), finishedTask(std::move(finishedTask))
 	{
-		this->id = id;
-		this->finishedTask = finishedTask;
 	}
 
 	PoolWorkerThread::~PoolWorkerThread()

@@ -5,6 +5,8 @@
 #include "TextureManager.h"
 #include "GameObjectManager.h"
 #include "IconObject.h"
+#include "SpriteObject.h"
+#include "Threading/StreamAssetLoader.h"
 #include "LoadingDisplay.h"
 #include "Utility/FileUtility.h"
 
@@ -16,8 +18,10 @@ namespace IET {
 
 	void TextureDisplay::initialize()
 	{
+		//GameObjectManager::getInstance()->addObject(this->displayBackground);
 		this->music = new sf::Music(FileUtility::getFileFromAssets("Audio/Something.mp3"));
 		this->loadingDisplay = new LoadingDisplay();
+		this->streamAssetLoader = new StreamAssetLoader("Assets/Textures/VideoStream/Stream1.mp4", this);
 		GameObjectManager::getInstance()->addObject(this->loadingDisplay);
 
 	}
@@ -44,8 +48,8 @@ namespace IET {
 				this->ticks = 0.0f;
 			return;
 		}
-		//if (currentFrame == 1)
-		//	this->music->play();
+		if (currentFrame == 0)
+			this->music->play();
 		/*this->ticks += BaseRunner::TIME_PER_FRAME.asMilliseconds();
 		if (this->streamingType == StreamingType::BATCH_LOAD && !this->startedStreaming && this->ticks > this->STREAMING_LOAD_DELAY)
 		{
@@ -62,9 +66,10 @@ namespace IET {
 
 		// Increment Icon
 		this->ticks += BaseRunner::TIME_PER_FRAME.asMilliseconds();
-		//if (this->ticks >= 29.97f) {
-		if (this->ticks >= 1.0f / 24.0f * 1000.0f) {
-			this->ticks -= 1.0f / 24.0f * 1000.0f;
+		if (this->ticks >= 29.97f) {
+		//if (this->ticks >= 1000.0f / 30.0f) {
+		//	this->ticks -= 1.0f / 30.0f * 1000.0f;
+			this->ticks = 0;
 			currentFrame++;
 			if (currentFrame >= iconList.size())
 			{
@@ -92,7 +97,7 @@ namespace IET {
 	void TextureDisplay::onFinishedExecution()
 	{
 		this->spawnObject(); //executes spawn once the texture is ready.
-		this->loadingDisplay->setLoaded(this->iconList.size());
+		this->loadingDisplay->setNumLoaded(this->iconList.size());
 		if (this->iconList.size() >= TextureManager::getInstance()->getVideoStreamingAssets())
 		{
 			this->loadingDisplay->startFadeOut();
@@ -107,8 +112,10 @@ namespace IET {
 		IconObject* iconObj = new IconObject(std::move(objectName), static_cast<int>(this->iconList.size()));
 		iconObj->initialize();
 		iconObj->setEnabled(false);
-		iconObj->setScale(BaseRunner::WINDOW_WIDTH / iconObj->getSprite()->getGlobalBounds().size.x, BaseRunner::WINDOW_HEIGHT / iconObj->getSprite()->getGlobalBounds().size.y);
-		this->iconList.push_back(iconObj);
+		iconObj->setPosition(BaseRunner::WINDOW_WIDTH / 2.0f - iconObj->getSprite()->getGlobalBounds().size.x / 2.0f,
+							 BaseRunner::WINDOW_HEIGHT / 2.0f - iconObj->getSprite()->getGlobalBounds().size.y / 2.0f);
+		//iconObj->setScale(BaseRunner::WINDOW_WIDTH / iconObj->getSprite()->getGlobalBounds().size.x, BaseRunner::WINDOW_HEIGHT / iconObj->getSprite()->getGlobalBounds().size.y);
+		this->iconList.push_back(std::move(iconObj));
 		/*String objectName = "Icon_" + std::to_string(this->iconList.size());
 		IconObject* iconObj = new IconObject(std::move(objectName), static_cast<int>(this->iconList.size()));
 		iconObj->initialize();

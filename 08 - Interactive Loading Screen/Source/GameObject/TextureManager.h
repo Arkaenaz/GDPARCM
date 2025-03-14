@@ -28,6 +28,7 @@ namespace IET
 		sf::Texture* getBackgroundFromList(const int index) const;
 		sf::Texture* getParallaxFromList(const int index) const;
 		sf::Texture* getCharacterFromList(const int index) const;
+		sf::Texture* getReadableFromList(const int index) const;
 
 		int getNumLoadedStreamTextures() const;
 		int getNumLoadedVideoStreamTextures() const;
@@ -48,6 +49,7 @@ namespace IET
 		const std::string BACKGROUND_IMAGE_PATH = "Source/Media/Background/";
 		const std::string PARALLAX_IMAGE_PATH = "Source/Media/Parallax/";
 		const std::string CHARACTER_IMAGE_PATH = "Source/Media/Character/";
+		const std::string READABLE_IMAGE_PATH = "Source/Media/Readable/";
 
 		ThreadPool* threadPool;
 
@@ -59,6 +61,7 @@ namespace IET
 		TextureList backgroundTextureList;
 		TextureList parallaxTextureList;
 		TextureList characterTextureList;
+		TextureList readableTextureList;
 
 		int streamingAssetCount = 0;
 		int videoStreamingAssetCount = 0;

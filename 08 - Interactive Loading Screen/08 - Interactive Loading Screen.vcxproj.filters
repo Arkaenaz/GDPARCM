@@ -101,6 +101,9 @@
     <ClCompile Include="Source\GameObject\CharacterButton.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameObject\RectangleObject.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\GameObject\AGameObject.h">
@@ -182,5 +185,6 @@
     <ClInclude Include="Source\GameObject\Button.h" />
     <ClInclude Include="Source\GameObject\CharacterButton.h" />
     <ClInclude Include="Source\Interfaces\IButtonListener.h" />
+    <ClInclude Include="Source\GameObject\RectangleObject.h" />
   </ItemGroup>
 </Project>

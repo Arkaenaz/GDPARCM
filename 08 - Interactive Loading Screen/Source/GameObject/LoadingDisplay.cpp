@@ -3,6 +3,7 @@
 
 #include "Button.h"
 #include "SpriteObject.h"
+#include "RectangleObject.h"
 #include "BaseRunner.h"
 #include "GameObjectManager.h"
 #include "TextureManager.h"
@@ -73,6 +74,14 @@ namespace IET
 		GameObjectManager::getInstance()->addObject(loadingBar);
 		loadingBar->setScale(0.0f, 0.2f);
 
+		for (int i = 0; i < 4; i++) {
+			sf::Texture* readableTexture = TextureManager::getInstance()->getReadableFromList(i);
+			SpriteObject* readableObject = new SpriteObject("Readable_" + std::to_string(i), readableTexture);
+			GameObjectManager::getInstance()->addObject(readableObject);
+			readableObject->setEnabled(false);
+			this->readableObjects.push_back(readableObject);
+		}
+
 		index = 0;
 		value = 0;
 
@@ -88,6 +97,10 @@ namespace IET
 		this->currentCharacter->setAlpha(0);
 		this->currentCharacter->setEnabled(true);
 
+		this->currentReadable = this->readableObjects[index];
+		this->currentReadable->setAlpha(0);
+		this->currentReadable->setEnabled(true);
+
 		this->startFadeIn();
 		
 	}
@@ -98,8 +111,9 @@ namespace IET
 		{
 			if (keyPressed->code == sf::Keyboard::Key::D)
 			{
-				if (this->fadeBetween || this->fadingOut)
+				if (this->fadeBetween || this->fadingOut || this->reading)
 					return;
+				this->value = 100;
 				this->buttonClick->play();
 				index++;
 				if (index >= 4)
@@ -110,8 +124,9 @@ namespace IET
 			}
 			if(keyPressed->code == sf::Keyboard::Key::A)
 			{
-				if (this->fadeBetween || this->fadingOut)
+				if (this->fadeBetween || this->fadingOut || this->reading)
 					return;
+				this->value = 100;
 				this->buttonClick->play();
 				index--;
 				if (index <= -1)
@@ -119,6 +134,21 @@ namespace IET
 					index = 3;
 				}
 				this->updateAssets();
+			}
+			if (keyPressed->code == sf::Keyboard::Key::F)
+			{
+				if (this->fadeBetween || this->fadingOut || this->fadingIn)
+					return;
+				if (!this->reading)
+				{
+					this->value = 0;
+					this->fadeInRead = true;
+				}
+				else if (this->reading && !this->fadeInRead)
+				{
+					this->value = 100;
+					this->fadeOutRead = true;
+				}
 			}
 		}
 	}
@@ -130,13 +160,7 @@ namespace IET
 		{
 			this->value = MathUtility::moveTowards(this->value, 100, deltaTime.asSeconds() * 50);
 			this->music->setVolume(this->value);
-			this->currentBackground->setAlpha(255 * (this->value / 100));
-			this->currentParallax->setAlpha(255 * (this->value / 100));
-			this->currentCharacter->setAlpha(255 * (this->value / 100));
-			this->leftButton->setAlpha(255 * (this->value / 100));
-			this->rightButton->setAlpha(255 * (this->value / 100));
-			this->loadingBar->setAlpha(255 * (this->value / 100));
-			this->glass->setAlpha(255 * (this->value / 100));
+			this->fadeAssets(this->value);
 
 			if (this->value >= 100)
 			{
@@ -148,25 +172,24 @@ namespace IET
 		{
 			this->value = MathUtility::moveTowards(this->value, 0, deltaTime.asSeconds() * 25);
 			this->music->setVolume(this->value);
-			this->currentBackground->setAlpha(255 * (this->value / 100));
-			this->currentParallax->setAlpha(255 * (this->value / 100));
-			this->currentCharacter->setAlpha(255 * (this->value / 100));
-			this->leftButton->setAlpha(255 * (this->value / 100));
-			this->rightButton->setAlpha(255 * (this->value / 100));
-			this->loadingBar->setAlpha(255 * (this->value / 100));
-			this->glass->setAlpha(255 * (this->value / 100));
+			this->fadeAssets(this->value);
+
+			if (this->reading)
+			{
+				this->currentReadable->setAlpha(255 * (this->value / 100));
+			}
 
 			if (this->value <= 0)
 			{
 				this->fadingOut = false;
-				this->disable();
+				this->disableAllAssets();
 			}
 		}
 
 		// Fade Between Assets
 		if (this->fadeBetween)
 		{
-			this->value = MathUtility::moveTowards(this->value, 100, deltaTime.asSeconds() * 50);
+			this->value = MathUtility::moveTowards(this->value, 100, deltaTime.asSeconds() * 100);
 
 			this->currentBackground->setAlpha(255 * (this->value / 100));
 			this->currentParallax->setAlpha(255 * (this->value / 100));
@@ -204,45 +227,40 @@ namespace IET
 			}
 		}
 
+		if (this->fadeInRead)
+		{
+			this->value = MathUtility::moveTowards(this->value, 100, deltaTime.asSeconds() * 100);
+			this->currentReadable->setAlpha(255 * (this->value / 100));
+			if (this->value >= 100)
+			{
+				this->fadeInRead = false;
+				this->reading = true;
+			}
+		}
+
+		if (this->fadeOutRead)
+		{
+			this->value = MathUtility::moveTowards(this->value, 0, deltaTime.asSeconds() * 100);
+			this->currentReadable->setAlpha(255 * (this->value / 100));
+			if (this->value <= 0)
+			{
+				this->fadeOutRead = false;
+				this->reading = false;
+			}
+		}
+
 		this->loadingBar->setScale(static_cast<float>(TextureManager::getInstance()->getNumLoadedVideoStreamTextures()) / static_cast<float>(TextureManager::getInstance()->getVideoStreamingAssets()), 0.2f);
 
 		// Parallax
-		const sf::Vector2i mousePosition = sf::Mouse::getPosition(BaseRunner::getInstance()->getWindow());
-
-		const float xOffset = (mousePosition.x - BaseRunner::WINDOW_WIDTH / 2.0f);
-		const float yOffset = (mousePosition.y - BaseRunner::WINDOW_HEIGHT / 2.0f);
-
-		constexpr float bgDepthScale = 0.04f;
-		constexpr float glassDepthScale = 0.05f;
-		constexpr float characterDepthScale = 0.03f;
-		constexpr float arrowDepthScale = 0.02f;
-		constexpr float lerpSpeed = 100.f;
-
-		const float xBg = BaseRunner::WINDOW_WIDTH / 2.0f - this->currentParallax->getSprite()->getGlobalBounds().size.x / 2.0f;
-		const float yBg = BaseRunner::WINDOW_HEIGHT / 2.0f- this->currentParallax->getSprite()->getGlobalBounds().size.y / 2.0f;
-
-		const float glassBgX = BaseRunner::WINDOW_WIDTH / 2.0f - this->glass->getSprite()->getGlobalBounds().size.x / 2.0f;
-		const float glassBgY = BaseRunner::WINDOW_HEIGHT / 2.0f - this->glass->getSprite()->getGlobalBounds().size.y / 2.0f;
-
-		const sf::Vector2f offset = { xOffset, yOffset };
-		const sf::Vector2f bgOriginalPosition = { xBg, yBg };
-		const sf::Vector2f glassOriginalPosition = { glassBgX, glassBgY };
-		const sf::Vector2f characterOriginalPosition = { 600, 400 };
-		const sf::Vector2f leftArrowOriginalPosition = { 150, (BaseRunner::WINDOW_HEIGHT - 78) / 2 };
-		const sf::Vector2f rightArrowOriginalPosition = { BaseRunner::WINDOW_WIDTH - 150, (BaseRunner::WINDOW_HEIGHT - 78) / 2 };
-
-		this->currentParallax->setPosition(MathUtility::moveTowards(this->currentParallax->getPosition(), bgOriginalPosition + offset * bgDepthScale, lerpSpeed * deltaTime.asSeconds()));
-		this->currentCharacter->setPosition(MathUtility::moveTowards(this->currentCharacter->getPosition(), characterOriginalPosition + offset * characterDepthScale, lerpSpeed * deltaTime.asSeconds()));
-		this->leftButton->setPosition(MathUtility::moveTowards(this->leftButton->getPosition(), leftArrowOriginalPosition + offset * arrowDepthScale, lerpSpeed * deltaTime.asSeconds()));
-		this->rightButton->setPosition(MathUtility::moveTowards(this->rightButton->getPosition(), rightArrowOriginalPosition + offset * arrowDepthScale, lerpSpeed * deltaTime.asSeconds()));
-		this->glass->setPosition(MathUtility::moveTowards(this->glass->getPosition(), glassOriginalPosition + offset * glassDepthScale, lerpSpeed * deltaTime.asSeconds()));
+		this->updateParallax(deltaTime);
 	}
 
-	void LoadingDisplay::disable()
+	void LoadingDisplay::disableAllAssets()
 	{
 		this->music->stop();
 		this->currentBackground->setEnabled(false);
 		this->currentCharacter->setEnabled(false);
+		this->currentReadable->setEnabled(false);
 		this->setEnabled(false);
 	}
 
@@ -250,8 +268,9 @@ namespace IET
 	{
 		if (pButton->getName().find("Left Arrow") != std::string::npos)
 		{
-			if (this->fadeBetween || this->fadingOut)
+			if (this->fadeBetween || this->fadingOut || this->reading)
 				return;
+			this->value = 100;
 			this->buttonClick->play();
 			index--;
 			if (index <= -1)
@@ -263,8 +282,9 @@ namespace IET
 
 		if (pButton->getName().find("Right Arrow") != std::string::npos)
 		{
-			if (this->fadeBetween || this->fadingOut)
+			if (this->fadeBetween || this->fadingOut || this->reading)
 				return;
+			this->value = 100;
 			this->buttonClick->play();
 			index++;
 			if (index >= 4)
@@ -288,9 +308,9 @@ namespace IET
 	{
 	}
 
-	void LoadingDisplay::setLoaded(int loaded)
+	void LoadingDisplay::setNumLoaded(int numLoaded)
 	{
-		this->loaded = loaded;
+		this->numLoaded = numLoaded;
 	}
 
 	void LoadingDisplay::draw(sf::RenderTarget& renderTarget, sf::RenderStates renderStates)
@@ -318,7 +338,45 @@ namespace IET
 		this->currentCharacter->setEnabled(true);
 		this->currentCharacter->setAlpha(0);
 
+		this->currentReadable->setEnabled(false);
+		this->currentReadable = this->readableObjects[index];
+		this->currentReadable->setAlpha(0);
+		this->currentReadable->setEnabled(true);
+
 		this->startFadeBetweenAssets();
+	}
+
+	void LoadingDisplay::updateParallax(sf::Time deltaTime)
+	{
+		const sf::Vector2i mousePosition = sf::Mouse::getPosition(BaseRunner::getInstance()->getWindow());
+
+		const float xOffset = (mousePosition.x - BaseRunner::WINDOW_WIDTH / 2.0f);
+		const float yOffset = (mousePosition.y - BaseRunner::WINDOW_HEIGHT / 2.0f);
+
+		constexpr float bgDepthScale = 0.04f;
+		constexpr float glassDepthScale = 0.05f;
+		constexpr float characterDepthScale = 0.03f;
+		constexpr float arrowDepthScale = 0.02f;
+		constexpr float lerpSpeed = 100.f;
+
+		const float xBg = BaseRunner::WINDOW_WIDTH / 2.0f - this->currentParallax->getSprite()->getGlobalBounds().size.x / 2.0f;
+		const float yBg = BaseRunner::WINDOW_HEIGHT / 2.0f - this->currentParallax->getSprite()->getGlobalBounds().size.y / 2.0f;
+
+		const float glassBgX = BaseRunner::WINDOW_WIDTH / 2.0f - this->glass->getSprite()->getGlobalBounds().size.x / 2.0f;
+		const float glassBgY = BaseRunner::WINDOW_HEIGHT / 2.0f - this->glass->getSprite()->getGlobalBounds().size.y / 2.0f;
+
+		const sf::Vector2f offset = { xOffset, yOffset };
+		const sf::Vector2f bgOriginalPosition = { xBg, yBg };
+		const sf::Vector2f glassOriginalPosition = { glassBgX, glassBgY };
+		const sf::Vector2f characterOriginalPosition = { 600, 400 };
+		const sf::Vector2f leftArrowOriginalPosition = { 150, (BaseRunner::WINDOW_HEIGHT - 78) / 2 };
+		const sf::Vector2f rightArrowOriginalPosition = { BaseRunner::WINDOW_WIDTH - 150, (BaseRunner::WINDOW_HEIGHT - 78) / 2 };
+
+		this->currentParallax->setPosition(MathUtility::moveTowards(this->currentParallax->getPosition(), bgOriginalPosition + offset * bgDepthScale, lerpSpeed * deltaTime.asSeconds()));
+		this->currentCharacter->setPosition(MathUtility::moveTowards(this->currentCharacter->getPosition(), characterOriginalPosition + offset * characterDepthScale, lerpSpeed * deltaTime.asSeconds()));
+		this->leftButton->setPosition(MathUtility::moveTowards(this->leftButton->getPosition(), leftArrowOriginalPosition + offset * arrowDepthScale, lerpSpeed * deltaTime.asSeconds()));
+		this->rightButton->setPosition(MathUtility::moveTowards(this->rightButton->getPosition(), rightArrowOriginalPosition + offset * arrowDepthScale, lerpSpeed * deltaTime.asSeconds()));
+		this->glass->setPosition(MathUtility::moveTowards(this->glass->getPosition(), glassOriginalPosition + offset * glassDepthScale, lerpSpeed * deltaTime.asSeconds()));
 	}
 
 	void LoadingDisplay::startFadeIn()
@@ -337,5 +395,20 @@ namespace IET
 	{
 		this->value = 0;
 		this->fadeBetween = true;
+	}
+
+	void LoadingDisplay::fadeAssets(float value)
+	{
+		this->currentBackground->setAlpha(255 * (value / 100));
+		this->currentParallax->setAlpha(255 * (value / 100));
+		this->currentCharacter->setAlpha(255 * (value / 100));
+		this->leftButton->setAlpha(255 * (value / 100));
+		this->rightButton->setAlpha(255 * (value / 100));
+		this->loadingBar->setAlpha(255 * (value / 100));
+		this->glass->setAlpha(255 * (value / 100));
+	}
+
+	void LoadingDisplay::fadeBetweenAssets(float value)
+	{
 	}
 }
