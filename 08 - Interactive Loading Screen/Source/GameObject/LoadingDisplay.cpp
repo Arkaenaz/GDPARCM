@@ -21,6 +21,9 @@ namespace IET
 		this->music = new sf::Music(FileUtility::getFileFromAssets("Audio/Loading.mp3"));
 		this->music->play();
 
+		this->buttonClickBuffer = new sf::SoundBuffer(FileUtility::getFileFromAssets("Audio/back-button-click.wav"));
+		this->buttonClick = new sf::Sound(*this->buttonClickBuffer);
+
 		for (int i = 0; i < 4; i++) {
 			sf::Texture* backgroundTexture = TextureManager::getInstance()->getBackgroundFromList(i);
 			SpriteObject* backgroundObject = new SpriteObject("Background_" + std::to_string(i), backgroundTexture);
@@ -37,22 +40,6 @@ namespace IET
 			parallaxObject->setPosition(384.f / 2.0f, 216 /2);
 			parallaxObject->setEnabled(false);
 			this->parallaxObjects.push_back(parallaxObject);
-
-			sf::Texture* characterTexture = TextureManager::getInstance()->getCharacterFromList(i);
-			SpriteObject* characterObject = new SpriteObject("Partner_" + std::to_string(i), characterTexture);
-
-			GameObjectManager::getInstance()->addObject(characterObject);
-			characterObject->setEnabled(false);
-			characterObject->setPosition(600, 400);
-			this->characterObjects.push_back(characterObject);
-
-			/*Button* characterButton = new Button("Partner_" + std::to_string(i), characterTexture);
-			characterButton->setPosition({150 + 400.0f * i, 700 });
-			GameObjectManager::getInstance()->addObject(characterButton);
-			characterButton->setScale(0.6f);
-			characterButton->getSprite()->setColor(sf::Color(255, 255, 255, 180));
-			characterButton->setListener(this);
-			this->characterButtons.push_back(characterButton);*/
 		}
 
 		sf::Texture* arrowTexture = new sf::Texture(FileUtility::getFileFromTextures("arrow.png"));
@@ -66,11 +53,23 @@ namespace IET
 		leftButton->setListener(this);
 		rightButton->setListener(this);
 
-		loadingBar = new SpriteObject("Loading Bar", new sf::Texture(FileUtility::getFileFromTextures("Loading Bar.png")));
-
 		GameObjectManager::getInstance()->addObject(leftButton);
 		GameObjectManager::getInstance()->addObject(rightButton);
 
+		this->glass = new SpriteObject("Glass", new sf::Texture(FileUtility::getFileFromTextures("Glass.png")));
+		GameObjectManager::getInstance()->addObject(glass);
+
+		for (int i = 0; i < 4; i++) {
+			sf::Texture* characterTexture = TextureManager::getInstance()->getCharacterFromList(i);
+			SpriteObject* characterObject = new SpriteObject("Partner_" + std::to_string(i), characterTexture);
+
+			GameObjectManager::getInstance()->addObject(characterObject);
+			characterObject->setEnabled(false);
+			characterObject->setPosition(600, 400);
+			this->characterObjects.push_back(characterObject);
+		}
+
+		loadingBar = new SpriteObject("Loading Bar", new sf::Texture(FileUtility::getFileFromTextures("Loading Bar.png")));
 		GameObjectManager::getInstance()->addObject(loadingBar);
 		loadingBar->setScale(0.0f, 0.2f);
 
@@ -99,8 +98,9 @@ namespace IET
 		{
 			if (keyPressed->code == sf::Keyboard::Key::D)
 			{
-				if (this->fadeBetween)
+				if (this->fadeBetween || this->fadingOut)
 					return;
+				this->buttonClick->play();
 				index++;
 				if (index >= 4)
 				{
@@ -110,8 +110,9 @@ namespace IET
 			}
 			if(keyPressed->code == sf::Keyboard::Key::A)
 			{
-				if (this->fadeBetween)
+				if (this->fadeBetween || this->fadingOut)
 					return;
+				this->buttonClick->play();
 				index--;
 				if (index <= -1)
 				{
@@ -135,6 +136,7 @@ namespace IET
 			this->leftButton->setAlpha(255 * (this->value / 100));
 			this->rightButton->setAlpha(255 * (this->value / 100));
 			this->loadingBar->setAlpha(255 * (this->value / 100));
+			this->glass->setAlpha(255 * (this->value / 100));
 
 			if (this->value >= 100)
 			{
@@ -152,6 +154,7 @@ namespace IET
 			this->leftButton->setAlpha(255 * (this->value / 100));
 			this->rightButton->setAlpha(255 * (this->value / 100));
 			this->loadingBar->setAlpha(255 * (this->value / 100));
+			this->glass->setAlpha(255 * (this->value / 100));
 
 			if (this->value <= 0)
 			{
@@ -210,6 +213,7 @@ namespace IET
 		const float yOffset = (mousePosition.y - BaseRunner::WINDOW_HEIGHT / 2.0f);
 
 		constexpr float bgDepthScale = 0.04f;
+		constexpr float glassDepthScale = 0.05f;
 		constexpr float characterDepthScale = 0.03f;
 		constexpr float arrowDepthScale = 0.02f;
 		constexpr float lerpSpeed = 100.f;
@@ -217,8 +221,12 @@ namespace IET
 		const float xBg = BaseRunner::WINDOW_WIDTH / 2.0f - this->currentParallax->getSprite()->getGlobalBounds().size.x / 2.0f;
 		const float yBg = BaseRunner::WINDOW_HEIGHT / 2.0f- this->currentParallax->getSprite()->getGlobalBounds().size.y / 2.0f;
 
+		const float glassBgX = BaseRunner::WINDOW_WIDTH / 2.0f - this->glass->getSprite()->getGlobalBounds().size.x / 2.0f;
+		const float glassBgY = BaseRunner::WINDOW_HEIGHT / 2.0f - this->glass->getSprite()->getGlobalBounds().size.y / 2.0f;
+
 		const sf::Vector2f offset = { xOffset, yOffset };
 		const sf::Vector2f bgOriginalPosition = { xBg, yBg };
+		const sf::Vector2f glassOriginalPosition = { glassBgX, glassBgY };
 		const sf::Vector2f characterOriginalPosition = { 600, 400 };
 		const sf::Vector2f leftArrowOriginalPosition = { 150, (BaseRunner::WINDOW_HEIGHT - 78) / 2 };
 		const sf::Vector2f rightArrowOriginalPosition = { BaseRunner::WINDOW_WIDTH - 150, (BaseRunner::WINDOW_HEIGHT - 78) / 2 };
@@ -227,6 +235,7 @@ namespace IET
 		this->currentCharacter->setPosition(MathUtility::moveTowards(this->currentCharacter->getPosition(), characterOriginalPosition + offset * characterDepthScale, lerpSpeed * deltaTime.asSeconds()));
 		this->leftButton->setPosition(MathUtility::moveTowards(this->leftButton->getPosition(), leftArrowOriginalPosition + offset * arrowDepthScale, lerpSpeed * deltaTime.asSeconds()));
 		this->rightButton->setPosition(MathUtility::moveTowards(this->rightButton->getPosition(), rightArrowOriginalPosition + offset * arrowDepthScale, lerpSpeed * deltaTime.asSeconds()));
+		this->glass->setPosition(MathUtility::moveTowards(this->glass->getPosition(), glassOriginalPosition + offset * glassDepthScale, lerpSpeed * deltaTime.asSeconds()));
 	}
 
 	void LoadingDisplay::disable()
@@ -241,8 +250,9 @@ namespace IET
 	{
 		if (pButton->getName().find("Left Arrow") != std::string::npos)
 		{
-			if (this->fadeBetween)
+			if (this->fadeBetween || this->fadingOut)
 				return;
+			this->buttonClick->play();
 			index--;
 			if (index <= -1)
 			{
@@ -253,8 +263,9 @@ namespace IET
 
 		if (pButton->getName().find("Right Arrow") != std::string::npos)
 		{
-			if (this->fadeBetween)
+			if (this->fadeBetween || this->fadingOut)
 				return;
+			this->buttonClick->play();
 			index++;
 			if (index >= 4)
 			{

@@ -26,7 +26,7 @@ namespace IET {
 		//std::random_device seeder;
 		//std::mt19937 engine(seeder());
 		//std::uniform_int_distribution<int> dist(1000, 4000);
-		IETThread::sleep(1000);
+		//IETThread::sleep(50);
 
 		std::vector<String> tokens = StringUtility::split(path, '/');
 		String assetName = StringUtility::split(tokens[tokens.size() - 1], '.')[0];

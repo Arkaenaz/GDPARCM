@@ -10,7 +10,7 @@ namespace IET {
 	{
 		this->countStreamingAssets();
 		this->countVideoStreamingAssets();
-		this->threadPool = new ThreadPool("Texture Manager Thread Pool", 8);
+		this->threadPool = new ThreadPool("Texture Manager Thread Pool", 1);
 		this->threadPool->startScheduler();
 	}
 

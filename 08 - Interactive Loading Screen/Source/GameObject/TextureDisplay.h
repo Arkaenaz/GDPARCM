@@ -30,7 +30,7 @@ namespace IET {
 
 		enum StreamingType { BATCH_LOAD = 0, SINGLE_STREAM = 1 };
 
-		const float STREAMING_LOAD_DELAY = 50;
+		const float STREAMING_LOAD_DELAY = 10.0f;
 		const StreamingType streamingType = SINGLE_STREAM;
 
 		Mutex guard; //used to avoid possible race conditions when spawning objects. Not really required for this exercise. Will be explained in future lessons.

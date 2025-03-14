@@ -44,8 +44,8 @@ namespace IET {
 				this->ticks = 0.0f;
 			return;
 		}
-		if (currentFrame == 1)
-			this->music->play();
+		//if (currentFrame == 1)
+		//	this->music->play();
 		/*this->ticks += BaseRunner::TIME_PER_FRAME.asMilliseconds();
 		if (this->streamingType == StreamingType::BATCH_LOAD && !this->startedStreaming && this->ticks > this->STREAMING_LOAD_DELAY)
 		{
@@ -62,8 +62,9 @@ namespace IET {
 
 		// Increment Icon
 		this->ticks += BaseRunner::TIME_PER_FRAME.asMilliseconds();
-		if (this->ticks >= 29.97f) {
-
+		//if (this->ticks >= 29.97f) {
+		if (this->ticks >= 1.0f / 24.0f * 1000.0f) {
+			this->ticks -= 1.0f / 24.0f * 1000.0f;
 			currentFrame++;
 			if (currentFrame >= iconList.size())
 			{
@@ -106,6 +107,7 @@ namespace IET {
 		IconObject* iconObj = new IconObject(std::move(objectName), static_cast<int>(this->iconList.size()));
 		iconObj->initialize();
 		iconObj->setEnabled(false);
+		iconObj->setScale(BaseRunner::WINDOW_WIDTH / iconObj->getSprite()->getGlobalBounds().size.x, BaseRunner::WINDOW_HEIGHT / iconObj->getSprite()->getGlobalBounds().size.y);
 		this->iconList.push_back(iconObj);
 		/*String objectName = "Icon_" + std::to_string(this->iconList.size());
 		IconObject* iconObj = new IconObject(std::move(objectName), static_cast<int>(this->iconList.size()));

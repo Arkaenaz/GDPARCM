@@ -48,6 +48,11 @@ namespace IET {
 		SpriteObject* previousCharacter;
 		SpriteObject* previousParallax;
 
+		SpriteObject* glass;
+
+		sf::SoundBuffer* buttonClickBuffer;
+		sf::Sound* buttonClick;
+
 		int index = -1;
 		sf::Music* music;
 
@@ -58,5 +63,6 @@ namespace IET {
 		bool fadingOut = false;
 		bool fadingIn = false;
 		bool fadeBetween = false;
+		bool reading = false;
 	};
 }
