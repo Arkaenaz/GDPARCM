@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\IETSemaphore.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\IETThread.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\UIManager.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ConsoleScreen.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\AUIScreen.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Debug.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\NetworkManager.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ServerClientConnectScreen.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ServerThread.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ClientThread.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ChatScreen.cpp">
+      <Filter>Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EventBroadcaster.cpp">
+      <Filter>Broadcasting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shared\ImGUI\imgui.cpp">
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shared\ImGUI\imgui_demo.cpp">
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shared\ImGUI\imgui_draw.cpp">
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shared\ImGUI\imgui_tables.cpp">
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shared\ImGUI\imgui_widgets.cpp">
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shared\ImGUI\imgui_impl_glfw.cpp">
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Shared\ImGUI\imgui_impl_opengl3.cpp">
+      <Filter>ImGUI</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\IETSemaphore.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IETThread.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\UIManager.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ConsoleScreen.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\AUIScreen.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Debug.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\NetworkManager.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ServerClientConnectScreen.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ServerThread.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ClientThread.h">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ChatScreen.h">
+      <Filter>Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventBroadcaster.h">
+      <Filter>Broadcasting</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EventNames.h">
+      <Filter>Broadcasting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\ImGUI\imconfig.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\ImGUI\imgui.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\ImGUI\imgui_internal.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\ImGUI\imstb_rectpack.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\ImGUI\imstb_textedit.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\ImGUI\imstb_truetype.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\ImGUI\imgui_impl_glfw.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\ImGUI\imgui_impl_opengl3_loader.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Shared\ImGUI\imgui_impl_opengl3.h">
+      <Filter>ImGUI</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Threading">
+      <UniqueIdentifier>{0bbf60b9-fc26-4b07-be49-be66f9cee10d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Screens">
+      <UniqueIdentifier>{b4f18fed-4fa7-4b8f-86bd-8cdcfd4a6f61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Networking">
+      <UniqueIdentifier>{1c86474c-60a6-4ff3-b23c-3e7a1b9f7df3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Broadcasting">
+      <UniqueIdentifier>{25fda733-a7d6-470e-9837-219ab684348d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGUI">
+      <UniqueIdentifier>{060caf4a-9662-4f7e-966b-064d97d935bc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

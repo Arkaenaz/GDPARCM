@@ -17,7 +17,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "06 - Speeding up Ray Tracin
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "07 - Implementing Semaphores", "07 - Implementing Semaphores\07 - Implementing Semaphores.vcxproj", "{06EA0C78-7710-4FEA-AC07-7EC162B8F109}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "07 - Implementing Semaphores", "08 - Interactive Loading Screen\08 - Interactive Loading Screen.vcxproj", "{74FEDD12-005D-40E0-A74E-CEEEA5720057}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "08 - Interactive Loading Screen", "08 - Interactive Loading Screen\08 - Interactive Loading Screen.vcxproj", "{74FEDD12-005D-40E0-A74E-CEEEA5720057}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "09 - Sockets Demo", "09 - Sockets Demo\09 - Sockets Demo.vcxproj", "{660FFF80-95F0-4332-9914-055F6C4F7D98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,8 +59,15 @@ Global
 		{74FEDD12-005D-40E0-A74E-CEEEA5720057}.Debug|x64.Build.0 = Debug|x64
 		{74FEDD12-005D-40E0-A74E-CEEEA5720057}.Release|x64.ActiveCfg = Release|x64
 		{74FEDD12-005D-40E0-A74E-CEEEA5720057}.Release|x64.Build.0 = Release|x64
+		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Debug|x64.ActiveCfg = Debug|x64
+		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Debug|x64.Build.0 = Debug|x64
+		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Release|x64.ActiveCfg = Release|x64
+		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {96E052D3-8616-4CB6-9793-DCCA5C42414A}
 	EndGlobalSection
 EndGlobal
