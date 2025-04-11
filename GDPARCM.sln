@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "08 - Interactive Loading Sc
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "09 - Sockets Demo", "09 - Sockets Demo\09 - Sockets Demo.vcxproj", "{660FFF80-95F0-4332-9914-055F6C4F7D98}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "10 - gRPC Demo", "10 - gRPC Demo\10 - gRPC Demo.vcxproj", "{B595E702-A681-4415-A94C-A29896FDDA39}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -63,6 +65,10 @@ Global
 		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Debug|x64.Build.0 = Debug|x64
 		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Release|x64.ActiveCfg = Release|x64
 		{660FFF80-95F0-4332-9914-055F6C4F7D98}.Release|x64.Build.0 = Release|x64
+		{B595E702-A681-4415-A94C-A29896FDDA39}.Debug|x64.ActiveCfg = Debug|x64
+		{B595E702-A681-4415-A94C-A29896FDDA39}.Debug|x64.Build.0 = Debug|x64
+		{B595E702-A681-4415-A94C-A29896FDDA39}.Release|x64.ActiveCfg = Release|x64
+		{B595E702-A681-4415-A94C-A29896FDDA39}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\GreeterServer.cpp" />
+    <ClCompile Include="Source\GreeterClient.cpp" />
+    <ClCompile Include="Source\IETThread.cpp">
+      <Filter>Threading</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\helloworld.grpc.pb.cc">
+      <Filter>Proto Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\helloworld.pb.cc">
+      <Filter>Proto Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Proto Files">
+      <UniqueIdentifier>{8f670ba5-4cfb-4930-9778-4a8d4afe5cb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Threading">
+      <UniqueIdentifier>{7b9c6dfb-80c6-4c03-b9fa-e67da5fd8486}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\helloworld.proto">
+      <Filter>Proto Files</Filter>
+    </None>
+    <None Include="Source\proto_compile.sh">
+      <Filter>Proto Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\GreeterServer.h" />
+    <ClInclude Include="Source\GreeterClient.h" />
+    <ClInclude Include="Source\IETThread.h">
+      <Filter>Threading</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\helloworld.grpc.pb.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\helloworld.pb.h">
+      <Filter>Proto Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
